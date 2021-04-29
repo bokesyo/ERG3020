@@ -18,7 +18,11 @@ class HelloForm(FlaskForm):
                         choices=[('Facts','Facts'),('Predicates','Predicates'),('Emotional','Emotional')],
                         validators=[DataRequired(), Length(1, 20)])
     body = TextAreaField('Your comments', validators=[DataRequired(), Length(1, 200)])
-    submit = SubmitField()
+    submit = SubmitField(label='Submit')
+
+
+class RestoreForm(FlaskForm):
+    submit = SubmitField(label='Clear Knowledge Base')
 
 
 class RenderForm(FlaskForm):

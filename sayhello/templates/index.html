@@ -3,8 +3,15 @@
 
 {% block content %}
     <div class="hello-form">
-        {{ render_form(form, action=request.full_path) }}
+        {{ render_form(fact_form, action=request.full_path) }}
     </div>
+
+    <div class="hello-form">
+        {{ render_form(restore_form, action=request.full_path) }}
+    </div>
+
+
+
     <p></p>
 
     <!-- This is Predicates Rank 1 -->

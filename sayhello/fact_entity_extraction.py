@@ -58,7 +58,6 @@ class UserPredict:
     def query(self, comment):
         result_dict = self.openInfoEngine.query(comment)
         print(result_dict)
-        print("---")
 
         # to determine the principal
         tags_0 = []
@@ -68,7 +67,6 @@ class UserPredict:
             description = verb_dict['description']
             tags = verb_dict['tags']
             # print(tags)
-
             # print("determine the principal according to the number of 0 tags")
             this = 0
             for i in tags:
@@ -209,6 +207,10 @@ class UserPredict:
     def breakdown(self, comment):
         if "or" in comment:
             pass
+
+        else:
+            pass
+
 
 
 """test = UserPredict(True)

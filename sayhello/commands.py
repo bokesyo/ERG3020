@@ -38,8 +38,8 @@ def forge(count):
     for i in range(count):
         message = Message(
             # name=fake.name(),
-            body=fake.sentence(),
-            c_type="Facts",
+            body="None",
+            c_type="None",
             nl_body="None",
             entity="None",
             timestamp=fake.date_time_this_year()

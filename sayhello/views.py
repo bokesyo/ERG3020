@@ -8,7 +8,7 @@
 from flask import flash, redirect, url_for, render_template
 
 from sayhello import app, db
-from sayhello.forms import HelloForm
+from sayhello.forms import HelloForm, RestoreForm
 from sayhello.models import Message
 
 # This is AI algorithm
@@ -23,6 +23,7 @@ utils = UserPredict(expand=True)
 def index():
 
     fact_form = HelloForm()
+
 
     if fact_form.validate_on_submit():
         # name = form.name.data
@@ -48,8 +49,12 @@ def index():
         db.session.add(message)
         db.session.commit()
 
-        flash('Your message have been sent to the world!')
+        flash('Published 1 comment.')
         return redirect(url_for('index'))
+
+    restore_form = RestoreForm()
+    if restore_form.submit():
+        pass
 
     messages = Message.query.order_by(Message.timestamp.desc()).all()
 
@@ -66,4 +71,4 @@ def index():
         elif i.c_type == "Emotional":
             emotionals.append(i)
 
-    return render_template('index.html', form=fact_form, predicates=predicates, facts=facts, emotionals=emotionals)
+    return render_template('index.html', fact_form=fact_form, restore_form=restore_form, predicates=predicates, facts=facts, emotionals=emotionals)

@@ -2,15 +2,20 @@
 {% from 'bootstrap/form.html' import render_form %}
 
 {% block content %}
+
     <div class="hello-form">
         {{ render_form(fact_form, action=request.full_path) }}
     </div>
 
-    <div class="hello-form">
-        {{ render_form(restore_form) }}
-    </div>
-
-
+    <h4 class="text-center">
+        Name Entities (Person): {{ nen_per}}
+    </h4>
+    <h4 class="text-center">
+        Name Entities (Organisation): {{ nen_org}}
+    </h4>
+    <h4 class="text-center">
+        Name Entities (Location): {{ nen_loc}}
+    </h4>
 
     <p></p>
 
@@ -79,5 +84,6 @@
             </a>
         {% endfor %}
     </div>
+
 
 {% endblock %}

@@ -15,7 +15,7 @@ from sayhello.models import Message
 from sayhello.fact_entity_extraction import UserPredict
 
 #
-utils = UserPredict(expand=True)
+utils = UserPredict()
 #
 
 
@@ -23,7 +23,6 @@ utils = UserPredict(expand=True)
 def index():
 
     fact_form = HelloForm()
-
 
     if fact_form.validate_on_submit():
         # name = form.name.data
@@ -52,9 +51,11 @@ def index():
         flash('Published 1 comment.')
         return redirect(url_for('index'))
 
+    # Clear the database:
     restore_form = RestoreForm()
-    if restore_form.submit():
-        pass
+    if restore_form.validate_on_submit():
+        if restore_form.password.data == "1234":
+            pass
 
     messages = Message.query.order_by(Message.timestamp.desc()).all()
 
@@ -70,5 +71,7 @@ def index():
             predicates.append(i)
         elif i.c_type == "Emotional":
             emotionals.append(i)
+
+    # for i in
 
     return render_template('index.html', fact_form=fact_form, restore_form=restore_form, predicates=predicates, facts=facts, emotionals=emotionals)

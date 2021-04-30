@@ -3,13 +3,13 @@ import os
 import sys
 from sayhello import app
 from nltk.stem.wordnet import WordNetLemmatizer
+from sayhello.commonDataProcess import CommonDatabase
 
 
 class OpenInfoPredictor:
     def __init__(self):
         # self.source_tgz = os.path.dirname(app.root_path) + "/sayhello/source/openie-model.2020.03.26.tar.gz"
         self.source_tgz = "https://storage.googleapis.com/allennlp-public-models/openie-model.2020.03.26.tar.gz"
-
         # print(source_tgz)
         # print("Start Loading")
         self.predictor = Predictor.from_path(self.source_tgz)
@@ -44,12 +44,11 @@ class NameEntityPredictor:
 
 
 class UserPredict:
-    def __init__(self, expand=False):
+    def __init__(self):
         self.openInfoEngine = OpenInfoPredictor()
         # self.entailEngine = EntailmentPredictor()
-        if expand:
-            self.nameEntityEngine = NameEntityPredictor()
-
+        self.nameEntityEngine = NameEntityPredictor()
+        self.commonDB = CommonDatabase("nen.cmdata")
         self.verb_database = []
         self.entity_database_per = []
         self.entity_database_org = []
@@ -135,7 +134,6 @@ class UserPredict:
             print('This may not be a fact')
             return False
 
-
         print("----------")
         this_atom_clauses_dict = this_atom_clauses
 
@@ -157,6 +155,7 @@ class UserPredict:
             a = arg_list[i]
             b = entity_result_list[i]
             if b:
+
                 new_list.append(a)
 
         this_atom_clauses['args'] = new_list
@@ -201,7 +200,6 @@ class UserPredict:
         if result_loc:
             self.entity_database_per.append(arg)
             return 'LOC'
-
         return False
 
     def breakdown(self, comment):
@@ -210,7 +208,6 @@ class UserPredict:
 
         else:
             pass
-
 
 
 """test = UserPredict(True)

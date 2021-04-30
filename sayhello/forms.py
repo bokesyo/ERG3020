@@ -22,6 +22,7 @@ class HelloForm(FlaskForm):
 
 
 class RestoreForm(FlaskForm):
+    password = TextAreaField('Admin:', validators=[DataRequired(), Length(1, 200)])
     submit = SubmitField(label='Clear Knowledge Base')
 
 
